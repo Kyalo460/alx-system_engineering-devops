@@ -1,2 +1,2 @@
 #!/bin/bash
-chmof 775 hello
+chmod 751 hello
