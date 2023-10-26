@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Displays the files in a directory without their prefixes
+
+for filename in *; do
+	new_filename="${filename#*-}"
+	echo "$new_filename"
+done
