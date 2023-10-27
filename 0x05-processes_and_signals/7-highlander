@@ -2,9 +2,9 @@
 # Displays "To infinity and beyond" indefinately
 # and prints "I am invincible" if process receives a SIGTERM
 
-while ((1))
+while true
 do
-	trap 'echo "I am invincible"' SIGTERM
 	echo "To infinity and beyond"
 	sleep 2
+	trap 'echo "I am invincible"' SIGTERM 
 done
