@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Will display all the current processes for all users
 
-ps -axu
+ps -axuf
