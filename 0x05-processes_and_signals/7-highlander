@@ -4,11 +4,7 @@
 
 while ((1))
 do
-	if ((SIGTERM))
-		then
-		echo "I am invincible"
-	fi
-
 	echo "To infinity and beyond"
 	sleep 2
+	trap 'echo "I am invincible"' SIGTERM
 done
