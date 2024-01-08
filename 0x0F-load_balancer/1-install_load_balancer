@@ -7,15 +7,16 @@ sudo add-apt-repository ppa:vbernat/haproxy-2.6
 sudo apt-get -y install haproxy
 # sudo cp -a /etc/haproxy/haproxy.cfg{,.orig}
 printf %s "
-frontend main
+listen main
     bind *:80
+    mode http
+    stats enable
+    stats uri /haproxy?stats
+    balance roundrobin
+    option httpclose
     option forwardfor  
-    default_backend app-main
-
-backend app-main
-	balance roundrobin
-    server 272285-web-01        52.3.251.52 check
-    server 272285-web-02        54.85.138.35 check
-    " >> /etc/haproxy/haproxy.cfg
+    server 272285-web-01 52.3.251.52 check
+    server 272285-web-02 54.85.138.35 check
+" >> /etc/haproxy/haproxy.cfg
 sudo service haproxy start
 
