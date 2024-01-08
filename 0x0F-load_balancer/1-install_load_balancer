@@ -5,7 +5,10 @@ sudo apt-get update -y
 sudo apt-get install --no-install-recommends software-properties-common
 sudo add-apt-repository ppa:vbernat/haproxy-2.6
 sudo apt-get -y install haproxy
-# sudo cp -a /etc/haproxy/haproxy.cfg{,.orig}
+
+echo "ENABLED=1" >> /etc/default/haproxy
+mv /etc/haproxy/haproxy.cfg{,.orig}
+
 printf %s "
 listen main
     bind *:80
