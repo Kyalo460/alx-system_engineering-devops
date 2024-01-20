@@ -6,10 +6,6 @@ sudo apt-get install --no-install-recommends software-properties-common
 sudo add-apt-repository ppa:vbernat/haproxy-2.6
 sudo apt-get -y install haproxy
 
-echo "ENABLED=1" >> /etc/default/haproxy
-mv /etc/haproxy/haproxy.cfg{,.original}
-touch /etc/haproxy/haproxy.cfg
-
 printf %s "global
     log 127.0.0.1 local0 notice
     maxconn 2000
@@ -27,16 +23,17 @@ defaults
     timeout client  10000
     timeout server  10000
 
-listen main
-    bind 0.0.0.0:80
-    mode http
-    stats enable
-    stats uri /haproxy?stats
+ 
+frontend muoki_frontend
+    bind *:80
+    default_backend my_backend
+
+backend muoki_backend
     balance roundrobin
-    option httpclose
-    option forwardfor
-    server 272285-web-01 52.3.251.52:80 check
-    server 272285-web-02 54.85.138.35:80 check
+    server 272285-web-01 52.3.251.52:80
+    server 272285-web-01 54.85.138.35:80
+
 " >> /etc/haproxy/haproxy.cfg
 
 service haproxy start
+
