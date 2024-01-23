@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# chekcks who the user passed as argument is
+
+if [ $# -gt 0 ];
+    then
+    sudo -u "$1" whoami
+fi
