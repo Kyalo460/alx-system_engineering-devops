@@ -4,6 +4,7 @@ first 10 hot posts listed for a given subreddit.
 """
 import requests
 
+
 def top_ten(subreddit):
     """Returns the top 10 hot posts."""
     url = f"https://www.reddit.com/r/{subreddit}/hot/.json"
@@ -14,7 +15,8 @@ def top_ten(subreddit):
         "limit": 10
     }
 
-    response = requests.get(url, headers=headers, params=params, allow_redirects=False)
+    response = requests.get(url, headers=headers,
+                            params=params, allow_redirects=False)
 
     if (response.status_code == 404):
         print("None")
@@ -23,5 +25,3 @@ def top_ten(subreddit):
     results = response.json().get("data")
 
     [print(c.get("data").get("title")) for c in results.get("children")]
-
-    
